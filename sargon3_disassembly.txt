@@ -13031,6 +13031,7 @@
 85B1   2D 2D 2D
 85B4   2D 2D 2D
 85B7   2D 2D 8D
+
 85BA   42          "BY DAN AND KATHE SPRACKLEN"
 85BB   59 20 44
 85BE   41 4E   
@@ -13404,27 +13405,28 @@
 8831   20 58 FC             JSR CLRSCRN ; clear end of screen
 8834   AD 83 13             LDA $1383
 8837   F0 04                BEQ L883D
-8839   A9 D2                LDA #$D2
-883B   D0 05                BNE L8842
+8839   A9 D2                LDA #$D2    ; 'R' mode (replay)
+883B   D0 05                BNE L8842   ; unconditional
+
 883D   AD 62 11   L883D     LDA $1162
 8840   09 B0      L8840     ORA #$B0
 8842   8D A5 05   L8842     STA $05A5
 8845   AD 63 11             LDA $1163
 8848   29 08                AND #$08
 884A   F0 05                BEQ L8851
-884C   A9 D6                LDA #$D6
+884C   A9 D6                LDA #$D6    ; 'V' mode (verify)
 884E   8D A7 05             STA $05A7
 8851   AD 63 11   L8851     LDA $1163
 8854   29 02                AND #$02
 8856   F0 05                BEQ L885D
-8858   A9 C5                LDA #$C5
+8858   A9 C5                LDA #$C5    ; 'E' mode (easy)
 885A   8D A6 05             STA $05A6
 885D   A9 00      L885D     LDA #$00
 885F   8D 87 13             STA $1387
 8862   85 EF                STA $EF
 8864   20 27 9A   L8864     JSR L9A27
 8867   20 5B 9A             JSR L9A5B
-886A   20 A1 88             JSR L88A1
+886A   20 A1 88             JSR L88A1   ; prepare TEXT2 screen
 886D   60                   RTS
 
 
@@ -13455,8 +13457,8 @@
 889E   D0 F6                BNE L8896
 88A0   60                   RTS
 
-; prepare text screens
-88A1   A9 A0      L88A1     LDA #$A0        ; clear screens with spaces
+; prepare TEXT2 screen
+88A1   A9 A0      L88A1     LDA #$A0        ; clear screen with spaces
 88A3   A0 00                LDY #$00
 88A5   99 00 08   L88A5     STA $0800,Y
 88A8   99 00 09             STA $0900,Y
@@ -16275,7 +16277,7 @@
 9C18   D0 03                BNE L9C1D
 9C1A   4C 18 9F             JMP L9F18
 9C1D   60         L9C1D     RTS
-9C1E   A2 9F      L9C1E     LDX #$9F
+9C1E   A2 9F      L9C1E     LDX #$9F    ; "NEW GAME?" message
 9C20   A0 86                LDY #$86
 9C22   20 98 9A             JSR L9A98
 9C25   20 72 9E             JSR L9E72
